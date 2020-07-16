@@ -62,6 +62,9 @@ body{
 		<br><br>
 
 	<div class="row">
+	<div class="column" style="width: 10%;">
+		
+		</div>
 		<div class="column" style="width: 15%;">
 		<h5 style="font-family: 'Lora', serif;">Flat No </h5>
 		<h5 style="font-family: 'Lora', serif;">Email</h5>
@@ -72,20 +75,22 @@ body{
 		<h5 style="font-family: 'Lora', serif;">${flatuser.email}</h5>
 		<h5 style="font-family: 'Lora', serif;">${flatuser.phone_no}</h5>
 		</div>
-		<div class="column" style="width: 25%;">
+		<div class="column" style="width: 20%;">
 		<h5 style="font-family: 'Lora', serif;">Onboarding Date</h5>
 		<h5 style="font-family: 'Lora', serif;">Payments &nbsp;&nbsp;&nbsp;&nbsp;Done</h5>
 		<h5 style="font-family: 'Lora', serif;">Payments &nbsp;&nbsp;&nbsp;&nbsp;Due </h5>
 		</div>
-		<div class="column" style="width: 25%;">
+		<div class="column" style="width: 20%;">
 		<h5 style="font-family: 'Lora', serif;">${flatuser.datejoin}</h5>
 		<h5 style="font-family: 'Lora', serif;">${donecount}</h5>
 		<h5 style="font-family: 'Lora', serif;">${duecount}</h5>
 		</div>
 	</div>
+	<hr style="border:1px solid green;">
 	<br><br>
 	<h3 style="font-family: 'Lora', serif;">Total Amount Paid:&nbsp;&nbsp;${paidamount}₹</h3><hr>
 	<h4 style="font-family: 'Lora', serif;">${message}</h4><br>
+	<hr style="border:1px solid green;">
 	<h4 style="font-family: 'Lora', serif;">Pending Monthly Activities</h4>
 	<table class="table">
 	<thead class="thead-dark">

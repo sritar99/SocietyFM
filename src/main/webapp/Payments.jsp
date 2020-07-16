@@ -72,8 +72,7 @@ th,td{
 		<div class="column" style="width: 25%;">
 			<h6 style="font-family: 'Lora', serif;">Flat No </h6><br>
 			<h6 style="font-family: 'Lora', serif;">Flat Owner</h6><br>
-			<h6 style="font-family: 'Lora', serif;">Activity ID</h6><br>
-			<h6 style="font-family: 'Lora', serif;">Title</h6><br>
+			<h6 style="font-family: 'Lora', serif;">Activity</h6><br>
 			<h6 style="font-family: 'Lora', serif;">Date Issued</h6><br>
 			<h6 style="font-family: 'Lora', serif;">Last Date</h6><br>
 			<h6 style="font-family: 'Lora', serif;">Amount</h6><br>
@@ -83,7 +82,6 @@ th,td{
 		<div class="column" style="width: 30%;">
 			<h6 style="font-family: 'Lora', serif;">${flatuser.flatno}</h6><br>
 			<h6 style="font-family: 'Lora', serif;">${flatuser.name}</h6><br>
-			<h6 style="font-family: 'Lora', serif;">${inwardpayment.activityid}</h6><br>
 			<h6 style="font-family: 'Lora', serif;">${inwardpayment.name}</h6><br>
 			<h6 style="font-family: 'Lora', serif;">${inwardpayment.monthyear}</h6><br>
 			<h6 style="font-family: 'Lora', serif;">${inwardpayment.lastdate}</h6><br>
