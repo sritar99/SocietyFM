@@ -32,4 +32,29 @@ public class FlatUserDAOImpl implements FlatUserDAO{
 		return flag;
 	}
 
+
+
+
+	public FlatUser get(int flatno) {
+		FlatUser flatuser=null;
+		
+		try {
+			String sql="select * from flatuser where flatno="+flatno;
+			connection = DBConnection.openConnection();
+			statement=connection.createStatement();
+			resultSet = statement.executeQuery(sql);
+			while(resultSet.next()) {
+				flatuser=new FlatUser();
+				flatuser.setFlatno(resultSet.getInt("flatno"));
+				flatuser.setName(resultSet.getString("name"));
+				flatuser.setEmail(resultSet.getString("email"));
+				flatuser.setPhone_no(resultSet.getString("mobile"));
+				flatuser.setDatejoin(resultSet.getDate("dateandtimejoined"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return flatuser;
+	}
+
 }

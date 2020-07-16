@@ -1,7 +1,6 @@
 package com.sfm.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,48 +15,43 @@ import com.sfm.dao.InwardPaymentsDAOImpl;
 import com.sfm.model.FlatUser;
 import com.sfm.model.InwardPayments;
 
-
-public class HomeController extends HttpServlet {
+public class PaymentController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
 	InwardPaymentsDAO inwardpaymentdao=null;
-	FlatUserDAO flatuserdao=null;
+	FlatUserDAO faltuserdao=null;
 
-    public HomeController() {
+    public PaymentController() {
         super();
         inwardpaymentdao=new InwardPaymentsDAOImpl();
-        flatuserdao=new FlatUserDAOImpl();
+        faltuserdao=new FlatUserDAOImpl();
 
     }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String getFlatId=request.getParameter("flatno");
-		
-		List<InwardPayments> list=inwardpaymentdao.get(Integer.parseInt(getFlatId));
-		request.setAttribute("list",list);
-		
-		FlatUser flatuser=flatuserdao.get(Integer.parseInt(getFlatId));
-		request.setAttribute("flatuser",flatuser);
-		
-		List<InwardPayments> paidlist=inwardpaymentdao.getPaidList();
-		request.setAttribute("paidlist",paidlist);
-		request.setAttribute("donecount",paidlist.size());
-		
-		List<InwardPayments> duelist=inwardpaymentdao.getDueList();
-		request.setAttribute("duelist",duelist);
-		request.setAttribute("duecount",duelist.size());
-		
-		Integer amountpaid=inwardpaymentdao.getPaidAmount();
-		request.setAttribute("paidamount",amountpaid);
-		
-		RequestDispatcher disp=request.getRequestDispatcher("/home.jsp");
-		disp.forward(request, response);
 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int id =Integer.parseInt(request.getParameter("id"));
+		InwardPayments inwardpayment=inwardpaymentdao.getRow(id);
+//		System.out.println(inwardpayment.toString());
+		request.setAttribute("inwardpayment",inwardpayment);
+		
+		FlatUser flatuser=faltuserdao.get(Integer.parseInt(request.getParameter("flatno")));
+		request.setAttribute("flatuser",flatuser);
+		RequestDispatcher disp=request.getRequestDispatcher("/Payments.jsp");
+		disp.forward(request, response);
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		int flatno=Integer.parseInt(request.getParameter("flatno"));
+		int issueid=Integer.parseInt(request.getParameter("issueid"));
+		int money=Integer.parseInt(request.getParameter("money"));
+		if(inwardpaymentdao.submit(issueid, money)) {
+			request.setAttribute("message","Payment Done Successfully");
+			String url="HomeController?flatno="+flatno;
+			response.sendRedirect(url);
+		}else {
+			doGet(request, response);
+		}
 	}
 
 }

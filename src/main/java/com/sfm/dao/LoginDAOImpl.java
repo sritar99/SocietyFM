@@ -12,7 +12,6 @@ public class LoginDAOImpl implements LoginDAO {
 	Connection connection = null;
 	PreparedStatement preparedStatement = null;
 	ResultSet resultSet = null;
-
 	public String authenticate(FlatUser loginuser) {
 		String sql="select * from flatuser where flatno=? and password=?";
 		try {
@@ -31,7 +30,5 @@ public class LoginDAOImpl implements LoginDAO {
 			e.printStackTrace();
 		}
 		return "error";
-
 	}
-
 }

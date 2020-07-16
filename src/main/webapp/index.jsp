@@ -22,6 +22,8 @@
         <div class="container">
             <form action="IndexController" method="POST" class="appointment-form" id="appointment-form">
                 <h2 style="font-family: 'Roboto', sans-serif;">Onboarding Registration</h2>
+                <p style="color: black;font-size: 15px;">We are delighted to have you among us.
+                 On behalf of all the members and the management,we would like to extend our warmest welcome and good wishes!</p>
                 <div class="form-group-1">
                     <input type="text" style="font-size:18px;" name="flatno" id="flatno" placeholder="Flat No" required />
                     <input type="text" style="font-size:18px;"name="name" id="name" placeholder="Your Name" required />
@@ -33,10 +35,9 @@
                 <div class="form-submit">
                     <input type="submit" name="submit" id="submit" class="submit" value="Join In!" />
                 </div>
+                <a href="loginprocess" style="center">Login Here!</a>
             </form>
-
-            <p style="margin-top: -85px; color: black;margin-left: 60px;font-size: 15px;">We are delighted to have you among us. On behalf of all the members and the management,we would like to extend our warmest welcome and good wishes!</p>
-            <a href="loginprocess" style="font-size: 18px; margin-left: 225px;margin-top: 10px;color: #3b5998">Already a Member?</a>
+            
         </div>
         
     </div>

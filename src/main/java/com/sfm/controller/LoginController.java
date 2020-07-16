@@ -33,10 +33,14 @@ public class LoginController extends HttpServlet {
 		loginfu.setPassword(request.getParameter("password"));
 		String status =logindao.authenticate(loginfu);
 		if(status.equals("true")) {
-			response.sendRedirect("home.jsp");
+			request.setAttribute("userid",Integer.parseInt(request.getParameter("flatno")));
+			String userid=request.getParameter("flatno");
+			String url="HomeController?flatno="+userid;
+			RequestDispatcher dispatcher=request.getRequestDispatcher(url);
+			dispatcher.forward(request, response);
 		}
 		if(status.equals("false")) {
-			response.sendRedirect("IndexController?status=false");
+			response.sendRedirect("loginprocess?status=InvalidCredentials");
 		}
 		if(status.equals("error")) {
 			response.sendRedirect("IndexController?status=error");

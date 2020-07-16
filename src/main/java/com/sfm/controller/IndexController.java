@@ -39,11 +39,16 @@ public class IndexController extends HttpServlet {
 		fu.setPassword(request.getParameter("password"));		
 		if(flatuserdao.save(fu)) {
 			System.out.println("UserAdded Successfully");
+			request.setAttribute("userid",Integer.parseInt(request.getParameter("flatno")));
+			String userid=request.getParameter("flatno");
+			String url="HomeController?flatno="+userid;
+			RequestDispatcher dispatcher=request.getRequestDispatcher(url);
+			dispatcher.forward(request, response);
 		}else {
 			System.out.println("UserRegistration is  UnSuccessfull");
+			doGet(request, response);
 		}
-		RequestDispatcher dispatcher=request.getRequestDispatcher("/home.jsp");
-		dispatcher.forward(request, response);
+		
 	}
 
 }

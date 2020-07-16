@@ -22,11 +22,12 @@
 		<servlet-class>com.sfm.controller.HomeController</servlet-class>
 	</servlet>
 	<servlet>
-		<servlet-name>AdminHomeController</servlet-name>
-		<display-name>AdminHomeController</display-name>
+		<servlet-name>PaymentController</servlet-name>
+		<display-name>PaymentController</display-name>
 		<description></description>
-		<servlet-class>com.sfm.controller.AdminHomeController</servlet-class>
+		<servlet-class>com.sfm.controller.PaymentController</servlet-class>
 	</servlet>
+
 	<servlet-mapping>
 		<servlet-name>IndexController</servlet-name>
 		<url-pattern>/IndexController</url-pattern>
@@ -39,10 +40,10 @@
 		<servlet-name>HomeController</servlet-name>
 		<url-pattern>/HomeController</url-pattern>
 	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>AdminHomeController</servlet-name>
-		<url-pattern>/AdminHomeController</url-pattern>
-	</servlet-mapping>
+<servlet-mapping>
+	<servlet-name>PaymentController</servlet-name>
+	<url-pattern>/PaymentController</url-pattern>
+</servlet-mapping>
 <welcome-file-list>  
    <welcome-file>start.jsp</welcome-file>  
 </welcome-file-list> 
