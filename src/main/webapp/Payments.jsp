@@ -25,7 +25,7 @@ th,td{
 <nav class="navbar navbar-expand-sm bg-dark rounded-bottom">
   <ul class="navbar-nav">
     <li class="nav-item">
-      <a class="nav-link disabled" href="#" style="color:white">SocietyFM</a>
+      <a class="nav-link disabled" href="#" style="color:white">GreenTownCitySFM</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="#" style="color:white">Defaulter's</a>

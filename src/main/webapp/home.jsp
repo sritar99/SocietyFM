@@ -12,6 +12,20 @@
 <style>
 th,td{
    font-family: 'Lora', serif;
+   color:white;
+   
+}
+body{
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  -ms-background-size: cover;
+  background-position: center center;
+      background: linear-gradient(rgba(0,0,0,.8), rgba(0,0,0,.8)), url("./images/houses.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    color: #fff;
 }
 </style>
 </head>
@@ -19,7 +33,7 @@ th,td{
 <nav class="navbar navbar-expand-sm bg-dark rounded-bottom">
   <ul class="navbar-nav">
     <li class="nav-item">
-      <a class="nav-link disabled" href="#" style="color:white">SocietyFM</a>
+      <a class="nav-link disabled" href="#" style="color:white">GreenTownCitySFM</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="#" style="color:white">Defaulter's</a>
@@ -35,8 +49,14 @@ th,td{
 
 <div class="container">
 	<div class="row">
-		<div class="column">
-		<h3 style="font-family: 'Lora', serif;">Hello ${flatuser.name}</h3>
+		<div class="column" style="width: 35%;">
+		
+		</div>
+		<div class="column" style="width: 30%;">
+		<h3 style="font-family: 'Lora', serif;text-align:center;">Hello ${flatuser.name}</h3>
+		</div>
+		<div class="column" style="width: 35%;">
+		
 		</div>
 	</div>
 		<br><br>
@@ -64,29 +84,25 @@ th,td{
 		</div>
 	</div>
 	<br><br>
-	<h3 style="font-family: 'Lora', serif;">Total Amount Paid:${paidamount}</h3><hr>
+	<h3 style="font-family: 'Lora', serif;">Total Amount Paid:&nbsp;&nbsp;${paidamount}₹</h3><hr>
 	<h4 style="font-family: 'Lora', serif;">${message}</h4><br>
 	<h4 style="font-family: 'Lora', serif;">Pending Monthly Activities</h4>
 	<table class="table">
 	<thead class="thead-dark">
 		<tr>
-			<th>Activity Id</th>
-			<th>Title</th>
+			<th>Activity</th>
 			<th>Month</th>
 			<th>Last Date</th>
 			<th>Issued Amount</th>
-			<th>Is Paid</th>
 			<th>Actions</th>
 		</tr>
 	</thead>
 	<c:forEach items="${duelist}" var="activity">
 		<tr>
-			<td>${activity.activityid}</td>
 			<td>${activity.name}</td>
 			<td>${activity.monthyear}</td>
 			<td>${activity.lastdate}</td>
-			<td>${activity.amount}</td>
-			<td>${activity.ispaid}</td> 
+			<td>${activity.amount}₹</td>
 			<td><a href="${pageContext.request.contextPath}/PaymentController?action=Payment&id=${activity.issueid}&flatno=${flatuser.flatno}">Pay Now</a></td>
 		</tr>
 	</c:forEach> 
@@ -96,8 +112,7 @@ th,td{
 	<table class="table">
 	<thead class="thead-dark">
 		<tr>
-			<th>Activity Id</th>
-			<th>Title</th>
+			<th>Activity</th>
 			<th>Month</th>
 			<th>Last Date</th>
 			<th>Issued Amount</th>
@@ -108,7 +123,6 @@ th,td{
 	</thead>
 	<c:forEach items="${paidlist}" var="activity">
 		<tr>
-			<td>${activity.activityid}</td>
 			<td>${activity.name}</td>
 			<td>${activity.monthyear}</td>
 			<td>${activity.lastdate}</td>
