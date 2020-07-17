@@ -31,7 +31,6 @@ public class PaymentController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int id =Integer.parseInt(request.getParameter("id"));
 		InwardPayments inwardpayment=inwardpaymentdao.getRow(id);
-//		System.out.println(inwardpayment.toString());
 		request.setAttribute("inwardpayment",inwardpayment);
 		
 		FlatUser flatuser=faltuserdao.get(Integer.parseInt(request.getParameter("flatno")));

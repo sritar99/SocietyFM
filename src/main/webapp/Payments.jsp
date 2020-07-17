@@ -2,11 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page isELIgnored="false" %>
 <%@ page import="java.time.LocalDate" %>
+<%@ page import="java.text.SimpleDateFormat,java.util.Date" %>
 <%
     pageContext.setAttribute("lDate", LocalDate.now());
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +28,7 @@ th,td{
 <nav class="navbar navbar-expand-sm bg-dark rounded-bottom">
   <ul class="navbar-nav">
     <li class="nav-item">
-      <a class="nav-link disabled" href="#" style="color:white">GreenTownCitySFM</a>
+      <a class="nav-link disabled" href="HomeController" style="color:white">GreenTownCitySFM</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="#" style="color:white">Defaulter's</a>
@@ -52,6 +55,21 @@ th,td{
          	<h4 style="font-family: 'Lora', serif;">Reference ID:${inwardpayment.issueid}</h4>
 		</div>
 	</div>
+<c:set var="due" value="${inwardpayment.lastdate}"/>
+<% 		Date date = new Date();
+	    String modifiedDate= new SimpleDateFormat("yyyy-MM-dd").format(date);
+		String[] words = modifiedDate.split("\\W+");
+	    int issueddate=Integer.parseInt(String.join("",words).substring(5));
+	    String dued=(String)pageContext.getAttribute("due");
+	    String[] words1 = dued.split("\\W+");
+	    int duedate=Integer.parseInt(String.join("",words1).substring(5));
+	   
+	    pageContext.setAttribute("curdate",issueddate);
+	    pageContext.setAttribute("duedate",duedate);
+	   
+	   
+		
+	%>
 	
 	<div class="row">
 		<div class="column" style="width: 40%;">
@@ -86,9 +104,9 @@ th,td{
 			<h6 style="font-family: 'Lora', serif;">${inwardpayment.monthyear}</h6><br>
 			<h6 style="font-family: 'Lora', serif;">${inwardpayment.lastdate}</h6><br>
 			<h6 style="font-family: 'Lora', serif;">${inwardpayment.amount}</h6><br>
-			<h6 style="font-family: 'Lora', serif;"><c:out value="${lDate.dayOfMonth < 10 eq true?0:100}"/></h6><br>
-			<h6 style="font-family: 'Lora', serif;"><c:out value="${lDate.dayOfMonth < 10 eq true?inwardpayment.amount:inwardpayment.amount+100}"/></h6>
-			<input type="hidden" name="id" value="<c:out value="${lDate.dayOfMonth < 10 eq true?inwardpayment.amount:inwardpayment.amount+100}"/>">
+ 			<h6 style="font-family: 'Lora', serif;">${curdate lt duedate? 0 :100}</h6><br>
+			<h6 style="font-family: 'Lora', serif;"><c:out value="${curdate lt duedate eq true?inwardpayment.amount:inwardpayment.amount+100}"/></h6>
+			<input type="hidden" name="id" value="<c:out value="${curdate lt duedate eq true?inwardpayment.amount:inwardpayment.amount+100}"/>">
 		</div>
 		<div class="column" style="width: 10%;">
 
@@ -103,7 +121,7 @@ th,td{
 				<div class="form-group-1">
 				<input type="hidden" name="flatno" value="${flatuser.flatno}">
 					<input type="hidden" name="issueid" value="${inwardpayment.issueid}">
-					<input type="hidden" name="money" value="<c:out value="${lDate.dayOfMonth < 10 eq true?inwardpayment.amount:inwardpayment.amount+100}"/>">
+					<input type="hidden" name="money" value="<c:out value="${curdate lt duedate eq true?inwardpayment.amount:inwardpayment.amount+100}"/>">
 				</div>
 				<div class="form-submit">
                		<input type="submit" class="btn btn-primary"<c:if test="${inwardpayment.ispaid == true}"><c:out value="disabled='disabled'"/></c:if> <c:if test="${activity.isplaced == true}"><c:out value="value=Paid Successfully"/></c:if> name="submit" id="submit" class="submit" value="Pay Now" />
@@ -114,8 +132,11 @@ th,td{
 
 		</div>
 	</div>
-
 	
+	
+
+
+
 </div>
 
 </body>
