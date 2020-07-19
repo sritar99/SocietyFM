@@ -121,6 +121,8 @@ th,td{
 				<div class="form-group-1">
 				<input type="hidden" name="flatno" value="${flatuser.flatno}">
 					<input type="hidden" name="issueid" value="${inwardpayment.issueid}">
+					<input type="hidden" name="delayed" value="${curdate lt duedate eq true?false:true}">
+					
 					<input type="hidden" name="money" value="<c:out value="${curdate lt duedate eq true?inwardpayment.amount:inwardpayment.amount+100}"/>">
 				</div>
 				<div class="form-submit">

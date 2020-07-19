@@ -111,9 +111,12 @@ public class InwardPaymentsDAOImpl implements InwardPaymentsDAO {
 		boolean flag=false;
 		try {
 			String sql="update inwardpayments set amountpaid='"+money+"',ispaid=true,datepaid=now() where issueid="+issueid;
+			
+			
 			connection = DBConnection.openConnection();
 			preparedStatement=connection.prepareStatement(sql);
 			preparedStatement.executeUpdate();
+
 			flag=true;
 			
 		} catch (Exception e) {

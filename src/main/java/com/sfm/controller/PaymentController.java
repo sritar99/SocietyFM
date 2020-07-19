@@ -44,12 +44,13 @@ public class PaymentController extends HttpServlet {
 		int flatno=Integer.parseInt(request.getParameter("flatno"));
 		int issueid=Integer.parseInt(request.getParameter("issueid"));
 		int money=Integer.parseInt(request.getParameter("money"));
+		boolean delay=Boolean.parseBoolean((request.getParameter("delayed")));
 		if(inwardpaymentdao.submit(issueid, money)) {
 			request.setAttribute("message","Payment Done Successfully");
 			String url="HomeController?flatno="+flatno;
 			response.sendRedirect(url);
 		}else {
-			doGet(request, response);
+			response.sendRedirect("HomeController?flatno="+flatno);
 		}
 	}
 

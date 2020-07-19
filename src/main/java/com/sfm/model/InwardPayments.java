@@ -81,6 +81,7 @@ public class InwardPayments {
 				+ amountpaid + ", ispaid=" + ispaid + ", datepaid=" + datepaid + "]";
 	}
 	
+	
 
 	
 }
