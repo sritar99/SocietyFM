@@ -127,7 +127,7 @@ body{
 	</table>
 	<br><hr><br>
 	<h4 style="font-family: 'Lora', serif;">Completed Monthly Activities</h4>
-	<table class="table" id="datatable">
+	<table class="table" id="datatable2">
 	<thead class="thead-dark">
 		<tr>
 			<th>Activity</th>
@@ -158,6 +158,13 @@ body{
 
 <script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.21/datatables.min.js"></script>
+<script>
+	$(document).ready(function(){
+		$("#datatable").DataTable();
+		$("#datatable2").DataTable();
+		});
+	
+</script>
 </body>
 </html>
 
