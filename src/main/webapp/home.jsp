@@ -8,6 +8,9 @@
 <meta charset="UTF-8">
 <title>User Portal</title>
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.21/datatables.min.css"/>
+ 
+
 <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
 <style>
 th,td{
@@ -30,6 +33,13 @@ body{
 </style>
 </head>
 <body>
+<%
+	String flatsession=(String)session.getAttribute("flatsession");
+	if(flatsession==null){
+		response.sendRedirect("index.jsp");
+	}
+%>
+
 <nav class="navbar navbar-expand-sm bg-dark rounded-bottom">
   <ul class="navbar-nav">
     <li class="nav-item">
@@ -41,7 +51,7 @@ body{
   </ul>
     <ul class="navbar-nav ml-auto">
     <li class="nav-item">
-      <a class="nav-link" href="#" style="color:white">Logout</a>
+      <a class="nav-link" href="${pageContext.request.contextPath}/logout.jsp" style="color:white">Logout</a>
     </li>
     </ul>
 </nav>
@@ -92,7 +102,7 @@ body{
 	<h4 style="font-family: 'Lora', serif;">${message}</h4><br>
 	<hr style="border:1px solid green;">
 	<h4 style="font-family: 'Lora', serif;">Pending Monthly Activities</h4>
-	<table class="table">
+	<table class="table" id="datatable">
 	<thead class="thead-dark">
 		<tr>
 			<th>Activity</th>
@@ -102,7 +112,8 @@ body{
 			<th>Actions</th>
 		</tr>
 	</thead>
-	<c:forEach items="${duelist}" var="activity">
+	<tbody>
+		<c:forEach items="${duelist}" var="activity">
 		<tr>
 			<td>${activity.name}</td>
 			<td>${activity.monthyear}</td>
@@ -111,10 +122,12 @@ body{
 			<td><a href="${pageContext.request.contextPath}/PaymentController?action=Payment&id=${activity.issueid}&flatno=${flatuser.flatno}">Pay Now</a></td>
 		</tr>
 	</c:forEach> 
+	</tbody>
+	
 	</table>
 	<br><hr><br>
 	<h4 style="font-family: 'Lora', serif;">Completed Monthly Activities</h4>
-	<table class="table">
+	<table class="table" id="datatable">
 	<thead class="thead-dark">
 		<tr>
 			<th>Activity</th>
@@ -126,21 +139,25 @@ body{
 
 		</tr>
 	</thead>
-	<c:forEach items="${paidlist}" var="activity">
-		<tr>
+	<tbody>
+		<c:forEach items="${paidlist}" var="activity">
+			<tr>
 			<td>${activity.name}</td>
 			<td>${activity.monthyear}</td>
 			<td>${activity.lastdate}</td>
 			<td>${activity.amount}</td>
 			<td>${activity.amountpaid}</td>
 			<td>${activity.datepaid}</td> 
-		</tr>
-	</c:forEach> 
+			</tr>
+		</c:forEach>
+	</tbody>
+		 
 	</table>
 	<br><hr><br>
 </div>
 
-
+<script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.21/datatables.min.js"></script>
 </body>
 </html>
 

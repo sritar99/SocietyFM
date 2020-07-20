@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.sfm.dao.LoginDAO;
 import com.sfm.dao.LoginDAOImpl;
@@ -28,14 +29,17 @@ public class LoginController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session=request.getSession();
 		FlatUser loginfu=new FlatUser();
 		loginfu.setFlatno(Integer.parseInt(request.getParameter("flatno")));
 		loginfu.setPassword(request.getParameter("password"));
 		String status =logindao.authenticate(loginfu);
 		if(status.equals("true")) {
+			session.setAttribute("flatsession",request.getParameter("flatno"));
 			request.setAttribute("userid",Integer.parseInt(request.getParameter("flatno")));
 			String userid=request.getParameter("flatno");
 			String url="HomeController?flatno="+userid;
+			
 			RequestDispatcher dispatcher=request.getRequestDispatcher(url);
 			dispatcher.forward(request, response);
 		}

@@ -32,26 +32,29 @@ public class HomeController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String getFlatId=request.getParameter("flatno");
-		
-		List<InwardPayments> list=inwardpaymentdao.get(Integer.parseInt(getFlatId));
-		request.setAttribute("list",list);
-		
-		FlatUser flatuser=flatuserdao.get(Integer.parseInt(getFlatId));
-		request.setAttribute("flatuser",flatuser);
-		
-		List<InwardPayments> paidlist=inwardpaymentdao.getPaidList();
-		request.setAttribute("paidlist",paidlist);
-		request.setAttribute("donecount",paidlist.size());
-		
-		List<InwardPayments> duelist=inwardpaymentdao.getDueList();
-		request.setAttribute("duelist",duelist);
-		request.setAttribute("duecount",duelist.size());
-		
-		Integer amountpaid=inwardpaymentdao.getPaidAmount();
-		request.setAttribute("paidamount",amountpaid);
-		
-		RequestDispatcher disp=request.getRequestDispatcher("/home.jsp");
-		disp.forward(request, response);
+		if(getFlatId!=null) {
+			List<InwardPayments> list=inwardpaymentdao.get(Integer.parseInt(getFlatId));
+			request.setAttribute("list",list);
+			
+			FlatUser flatuser=flatuserdao.get(Integer.parseInt(getFlatId));
+			request.setAttribute("flatuser",flatuser);
+			
+			List<InwardPayments> paidlist=inwardpaymentdao.getPaidList();
+			request.setAttribute("paidlist",paidlist);
+			request.setAttribute("donecount",paidlist.size());
+			
+			List<InwardPayments> duelist=inwardpaymentdao.getDueList();
+			request.setAttribute("duelist",duelist);
+			request.setAttribute("duecount",duelist.size());
+			
+			Integer amountpaid=inwardpaymentdao.getPaidAmount();
+			request.setAttribute("paidamount",amountpaid);
+			
+			RequestDispatcher disp=request.getRequestDispatcher("/home.jsp");
+			disp.forward(request, response);
+		}else {
+			response.sendRedirect("login.jsp");
+		}
 
 	}
 

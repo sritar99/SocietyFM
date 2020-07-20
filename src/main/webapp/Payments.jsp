@@ -25,6 +25,14 @@ th,td{
 </style>
 </head>
 <body>
+
+<%
+	String flatsession=(String)session.getAttribute("flatsession");
+	if(flatsession==null){
+		response.sendRedirect("index.jsp");
+	}
+%>
+
 <nav class="navbar navbar-expand-sm bg-dark rounded-bottom">
   <ul class="navbar-nav">
     <li class="nav-item">
@@ -36,7 +44,7 @@ th,td{
   </ul>
     <ul class="navbar-nav ml-auto">
     <li class="nav-item">
-      <a class="nav-link" href="#" style="color:white">Logout</a>
+      <a class="nav-link" href="${pageContext.request.contextPath}/logout.jsp" style="color:white">Logout</a>
     </li>
     </ul>
 </nav>
