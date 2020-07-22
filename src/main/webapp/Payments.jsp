@@ -36,10 +36,10 @@ th,td{
 <nav class="navbar navbar-expand-sm bg-dark rounded-bottom">
   <ul class="navbar-nav">
     <li class="nav-item">
-      <a class="nav-link disabled" href="HomeController" style="color:white">GreenTownCitySFM</a>
+      <a class="nav-link" href="HomeController?flatno=${flatuser.flatno}" style="color:white">GreenTownCitySFM</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#" style="color:white">Defaulter's</a>
+      <a class="nav-link" href="DefaultersController?flatno=${flatuser.flatno}" style="color:white">Defaulter's</a>
     </li>
   </ul>
     <ul class="navbar-nav ml-auto">

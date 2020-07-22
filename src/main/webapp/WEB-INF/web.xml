@@ -27,6 +27,12 @@
 		<description></description>
 		<servlet-class>com.sfm.controller.PaymentController</servlet-class>
 	</servlet>
+	<servlet>
+  	<servlet-name>DefaultersController</servlet-name>
+  	<display-name>DefaultersController</display-name>
+  	<description></description>
+  	<servlet-class>com.sfm.controller.DefaultersController</servlet-class>
+  	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>IndexController</servlet-name>
@@ -44,6 +50,10 @@
 	<servlet-name>PaymentController</servlet-name>
 	<url-pattern>/PaymentController</url-pattern>
 </servlet-mapping>
+<servlet-mapping>
+  	<servlet-name>DefaultersController</servlet-name>
+  	<url-pattern>/DefaultersController</url-pattern>
+  </servlet-mapping>
 <welcome-file-list>  
    <welcome-file>start.jsp</welcome-file>  
 </welcome-file-list> 

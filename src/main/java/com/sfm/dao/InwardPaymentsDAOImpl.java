@@ -125,5 +125,45 @@ public class InwardPaymentsDAOImpl implements InwardPaymentsDAO {
 		return flag;
 	}
 
+	public List<InwardPayments> getdefaulters() {
+		
+		List<InwardPayments> inwardlist=null;
+		InwardPayments inwardpayment=null;
+		
+		try {
+			
+			inwardlist=new ArrayList<InwardPayments>();
+			String sql="select * from inwardpayments where ispaid=false or amount!=amountpaid or ispaid is null";
+			
+			connection = DBConnection.openConnection();
+			st=connection.createStatement();
+			resultSet = st.executeQuery(sql);
+			while(resultSet.next()) {
+				inwardpayment=new InwardPayments();
+				inwardpayment.setName(resultSet.getString("name"));
+				inwardpayment.setAmount(resultSet.getInt("amount"));
+				inwardpayment.setActivityid(resultSet.getInt("activityid"));
+				inwardpayment.setAmountpaid(resultSet.getInt("amountpaid"));
+				inwardpayment.setDatepaid(resultSet.getDate("datepaid"));
+				inwardpayment.setFlatno(resultSet.getInt("flatno"));
+				inwardpayment.setIspaid(resultSet.getBoolean("ispaid"));
+				inwardpayment.setIssueid(resultSet.getInt("issueid"));
+				inwardpayment.setLastdate(resultSet.getString("lastdate"));
+				inwardpayment.setMonthyear(resultSet.getString("monthyear"));
+				inwardlist.add(inwardpayment);
+				
+				
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return inwardlist;
+		
+		
+	}
+
 
 }

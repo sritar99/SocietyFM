@@ -16,4 +16,6 @@ public interface InwardPaymentsDAO {
 	Integer getPaidAmount();
 	
 	boolean submit(int issueid,int money);
+	
+	List<InwardPayments> getdefaulters();
 }
