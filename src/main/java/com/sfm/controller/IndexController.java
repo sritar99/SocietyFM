@@ -7,20 +7,23 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.sfm.dao.FlatUserDAO;
 import com.sfm.dao.FlatUserDAOImpl;
+import com.sfm.dao.LoggingDAO;
+import com.sfm.dao.LoggingDAOImpl;
 import com.sfm.model.FlatUser;
 
-/**
- * Servlet implementation class IndexController
- */
+
 public class IndexController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	LoggingDAO loggingdao=null;
 
 	FlatUserDAO flatuserdao =null;
     public IndexController() {
     	flatuserdao=new FlatUserDAOImpl();
+    	loggingdao=new LoggingDAOImpl();
     }
 
 
@@ -36,14 +39,20 @@ public class IndexController extends HttpServlet {
 		fu.setName(request.getParameter("name"));
 		fu.setEmail(request.getParameter("email"));
 		fu.setPhone_no(request.getParameter("phone_number"));
-		fu.setPassword(request.getParameter("password"));		
+		fu.setPassword(request.getParameter("password"));	
+		
 		if(flatuserdao.save(fu)) {
+			HttpSession session=request.getSession();
+			session.setAttribute("flatsession",request.getParameter("flatno"));
 			System.out.println("UserAdded Successfully");
 			request.setAttribute("userid",Integer.parseInt(request.getParameter("flatno")));
 			String userid=request.getParameter("flatno");
 			String url="HomeController?flatno="+userid;
 			RequestDispatcher dispatcher=request.getRequestDispatcher(url);
 			dispatcher.forward(request, response);
+			if(loggingdao.save("Registration Process","FlatUser",request.getParameter("flatno"))) {
+				System.out.println("logging event inserted");
+			}
 		}else {
 			System.out.println("UserRegistration is  UnSuccessfull");
 			doGet(request, response);

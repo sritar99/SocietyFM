@@ -13,6 +13,8 @@ import com.sfm.dao.FlatUserDAO;
 import com.sfm.dao.FlatUserDAOImpl;
 import com.sfm.dao.InwardPaymentsDAO;
 import com.sfm.dao.InwardPaymentsDAOImpl;
+import com.sfm.dao.LoggingDAO;
+import com.sfm.dao.LoggingDAOImpl;
 import com.sfm.model.FlatUser;
 import com.sfm.model.InwardPayments;
 
@@ -22,11 +24,13 @@ public class HomeController extends HttpServlet {
 	
 	InwardPaymentsDAO inwardpaymentdao=null;
 	FlatUserDAO flatuserdao=null;
+	LoggingDAO loggingdao=null;
 
     public HomeController() {
         super();
         inwardpaymentdao=new InwardPaymentsDAOImpl();
         flatuserdao=new FlatUserDAOImpl();
+        loggingdao=new LoggingDAOImpl();
 
     }
 
@@ -49,6 +53,10 @@ public class HomeController extends HttpServlet {
 			
 			Integer amountpaid=inwardpaymentdao.getPaidAmount();
 			request.setAttribute("paidamount",amountpaid);
+			
+			if(loggingdao.save("Retreival of Home Page","FlatUser",request.getParameter("flatno"))) {
+				System.out.println("logging event inserted");
+			}
 			
 			RequestDispatcher disp=request.getRequestDispatcher("/home.jsp");
 			disp.forward(request, response);

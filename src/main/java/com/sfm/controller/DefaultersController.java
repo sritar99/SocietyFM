@@ -10,7 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.sfm.dao.InwardPaymentsDAO;
 import com.sfm.dao.InwardPaymentsDAOImpl;
-
+import com.sfm.dao.LoggingDAO;
+import com.sfm.dao.LoggingDAOImpl;
 import com.sfm.model.InwardPayments;
 
 
@@ -22,16 +23,23 @@ public class DefaultersController extends HttpServlet {
 
 	
 	InwardPaymentsDAO inwardpaymentdao=null;
+	LoggingDAO loggingdao=null;
 
     public DefaultersController() {
         super();
         inwardpaymentdao=new InwardPaymentsDAOImpl();
+        loggingdao=new LoggingDAOImpl();
 
     }
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int getFlatId=Integer.parseInt(request.getParameter("flatno"));
+		
+		if(loggingdao.save("Retreival of Reports/Defaulters","FlatUser",request.getParameter("flatno"))) {
+			System.out.println("logging event inserted");
+		}
+		
 		request.setAttribute("flatno",getFlatId);
 		List<InwardPayments> inwardlist=inwardpaymentdao.getdefaulters();
 		request.setAttribute("inwardlist",inwardlist);

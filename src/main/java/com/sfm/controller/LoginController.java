@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.sfm.dao.LoggingDAO;
+import com.sfm.dao.LoggingDAOImpl;
 import com.sfm.dao.LoginDAO;
 import com.sfm.dao.LoginDAOImpl;
 import com.sfm.model.FlatUser;
@@ -18,8 +20,10 @@ public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	LoginDAO logindao=null;
+	LoggingDAO loggingdao=null;
     public LoginController() {
         logindao=new LoginDAOImpl();
+        loggingdao=new LoggingDAOImpl();
 
     }
     
@@ -39,6 +43,10 @@ public class LoginController extends HttpServlet {
 			request.setAttribute("userid",Integer.parseInt(request.getParameter("flatno")));
 			String userid=request.getParameter("flatno");
 			String url="HomeController?flatno="+userid;
+			
+			if(loggingdao.save("Login Process","FlatUser",request.getParameter("flatno"))) {
+				System.out.println("logging event inserted");
+			}
 			
 			RequestDispatcher dispatcher=request.getRequestDispatcher(url);
 			dispatcher.forward(request, response);

@@ -12,6 +12,8 @@ import com.sfm.dao.FlatUserDAO;
 import com.sfm.dao.FlatUserDAOImpl;
 import com.sfm.dao.InwardPaymentsDAO;
 import com.sfm.dao.InwardPaymentsDAOImpl;
+import com.sfm.dao.LoggingDAO;
+import com.sfm.dao.LoggingDAOImpl;
 import com.sfm.model.FlatUser;
 import com.sfm.model.InwardPayments;
 
@@ -19,11 +21,13 @@ public class PaymentController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	InwardPaymentsDAO inwardpaymentdao=null;
 	FlatUserDAO faltuserdao=null;
+	LoggingDAO loggingdao=null;
 
     public PaymentController() {
         super();
         inwardpaymentdao=new InwardPaymentsDAOImpl();
         faltuserdao=new FlatUserDAOImpl();
+        loggingdao=new LoggingDAOImpl();
 
     }
 
@@ -35,6 +39,9 @@ public class PaymentController extends HttpServlet {
 		
 		FlatUser flatuser=faltuserdao.get(Integer.parseInt(request.getParameter("flatno")));
 		request.setAttribute("flatuser",flatuser);
+		if(loggingdao.save("Reviewing Payment","FlatUser",request.getParameter("flatno"))) {
+			System.out.println("logging event inserted");
+		}
 		RequestDispatcher disp=request.getRequestDispatcher("/Payments.jsp");
 		disp.forward(request, response);
 		
@@ -47,6 +54,9 @@ public class PaymentController extends HttpServlet {
 		boolean delay=Boolean.parseBoolean((request.getParameter("delayed")));
 		if(inwardpaymentdao.submit(issueid, money)) {
 			request.setAttribute("message","Payment Done Successfully");
+			if(loggingdao.save("Processing of Payment","FlatUser",request.getParameter("flatno"))) {
+				System.out.println("logging event inserted");
+			}
 			String url="HomeController?flatno="+flatno;
 			response.sendRedirect(url);
 		}else {

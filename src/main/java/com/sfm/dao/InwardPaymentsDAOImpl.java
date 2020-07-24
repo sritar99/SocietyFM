@@ -24,6 +24,11 @@ public class InwardPaymentsDAOImpl implements InwardPaymentsDAO {
 
 		List<InwardPayments> inwardpaymentslist=null;
 		InwardPayments inwardpayment=null;
+		LoggingDAO loggingdao=null;
+		loggingdao=new LoggingDAOImpl();
+		if(loggingdao.save("Retrieving User InwardPayments","FlatUser",String.valueOf(id))) {
+			System.out.println("logging event inserted");
+		}
 
 		
 		try {
@@ -82,6 +87,9 @@ public class InwardPaymentsDAOImpl implements InwardPaymentsDAO {
 
 	public InwardPayments getRow(int issueid) {
 		InwardPayments inwardpayment=null;
+		LoggingDAO loggingdao=null;
+		loggingdao=new LoggingDAOImpl();
+		
 		try {
 			String sql="select * from inwardpayments where issueid="+issueid;
 			connection = DBConnection.openConnection();
@@ -100,6 +108,9 @@ public class InwardPaymentsDAOImpl implements InwardPaymentsDAO {
 				inwardpayment.setDatepaid(resultSet.getDate("datepaid"));
 				inwardpayment.setAmountpaid(resultSet.getInt("amountpaid"));
 			}
+			if(loggingdao.save("Retrieving User InwardPayment for Payment Process","FlatUser",String.valueOf(inwardpayment.getFlatno()))) {
+				System.out.println("logging event inserted");
+			}
 		} catch (Exception e) {
 
 		}
@@ -109,6 +120,8 @@ public class InwardPaymentsDAOImpl implements InwardPaymentsDAO {
 
 	public boolean submit(int issueid, int money) {
 		boolean flag=false;
+		LoggingDAO loggingdao=null;
+		loggingdao=new LoggingDAOImpl();
 		try {
 			String sql="update inwardpayments set amountpaid='"+money+"',ispaid=true,datepaid=now() where issueid="+issueid;
 			
@@ -118,6 +131,9 @@ public class InwardPaymentsDAOImpl implements InwardPaymentsDAO {
 			preparedStatement.executeUpdate();
 
 			flag=true;
+			if(loggingdao.save("Payment Processing of User InwardPayment","Payment IssueId",String.valueOf(issueid))) {
+				System.out.println("logging event inserted");
+			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();

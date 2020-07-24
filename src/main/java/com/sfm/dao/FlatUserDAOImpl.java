@@ -37,7 +37,11 @@ public class FlatUserDAOImpl implements FlatUserDAO{
 
 	public FlatUser get(int flatno) {
 		FlatUser flatuser=null;
-		
+		LoggingDAO loggingdao=null;
+		loggingdao=new LoggingDAOImpl();
+		if(loggingdao.save("Retrieving User Profile","FlatUser",String.valueOf(flatno))) {
+			System.out.println("logging event inserted");
+		}
 		try {
 			String sql="select * from flatuser where flatno="+flatno;
 			connection = DBConnection.openConnection();
