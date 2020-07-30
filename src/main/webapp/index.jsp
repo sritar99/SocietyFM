@@ -20,7 +20,9 @@
     <div class="main">
 
         <div class="container">
+        
             <form action="IndexController" method="POST" class="appointment-form" id="appointment-form">
+            <h4 style="color:black;">${message}</h4>
                 <h2 style="font-family: 'Roboto', sans-serif;">Onboarding Registration</h2>
                 <p style="color: black;font-size: 15px;">We are delighted to have you among us.
                  On behalf of all the members and the management,we would like to extend our warmest welcome and good wishes!</p>

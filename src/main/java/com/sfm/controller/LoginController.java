@@ -52,7 +52,9 @@ public class LoginController extends HttpServlet {
 			dispatcher.forward(request, response);
 		}
 		if(status.equals("false")) {
-			response.sendRedirect("loginprocess?status=InvalidCredentials");
+			request.setAttribute("message","Invalid User Credentials");
+			RequestDispatcher dispatcher=request.getRequestDispatcher("/login.jsp");
+			dispatcher.forward(request, response);
 		}
 		if(status.equals("error")) {
 			response.sendRedirect("IndexController?status=error");

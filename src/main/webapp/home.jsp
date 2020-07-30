@@ -51,6 +51,9 @@ body{
   </ul>
     <ul class="navbar-nav ml-auto">
     <li class="nav-item">
+      <a class="nav-link" href="${pageContext.request.contextPath}/contact.jsp" style="color:white">Contact Us</a>
+    </li>
+    <li class="nav-item">
       <a class="nav-link" href="${pageContext.request.contextPath}/logout.jsp" style="color:white">Logout</a>
     </li>
     </ul>
@@ -72,15 +75,15 @@ body{
 		<br><br>
 
 	<div class="row">
-	<div class="column" style="width: 10%;">
+	<div class="column" style="width: 5%;">
 		
-		</div>
+	</div>
 		<div class="column" style="width: 15%;">
 		<h5 style="font-family: 'Lora', serif;">Flat No </h5>
 		<h5 style="font-family: 'Lora', serif;">Email</h5>
 		<h5 style="font-family: 'Lora', serif;">Mobile</h5>
 		</div>
-		<div class="column" style="width: 35%;">
+		<div class="column" style="width: 30%;">
 		<h5 style="font-family: 'Lora', serif;">${flatuser.flatno}</h5>
 		<h5 style="font-family: 'Lora', serif;">${flatuser.email}</h5>
 		<h5 style="font-family: 'Lora', serif;">${flatuser.phone_no}</h5>
@@ -90,10 +93,14 @@ body{
 		<h5 style="font-family: 'Lora', serif;">Payments &nbsp;&nbsp;&nbsp;&nbsp;Done</h5>
 		<h5 style="font-family: 'Lora', serif;">Payments &nbsp;&nbsp;&nbsp;&nbsp;Due </h5>
 		</div>
-		<div class="column" style="width: 20%;">
+		<div class="column" style="width: 15%;">
 		<h5 style="font-family: 'Lora', serif;">${flatuser.datejoin}</h5>
 		<h5 style="font-family: 'Lora', serif;">${donecount}</h5>
 		<h5 style="font-family: 'Lora', serif;">${duecount}</h5>
+		</div>
+		<div class="column" style="width: 15%;">
+		<br><br>
+		<button class="btn btn-primary" onclick="window.location.href='updateprofile.jsp'">Update Profile</button>
 		</div>
 	</div>
 	<hr style="border:1px solid green;">

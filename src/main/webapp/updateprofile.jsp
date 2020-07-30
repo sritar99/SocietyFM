@@ -22,18 +22,18 @@
 
         <div class="container">
         
-            <form action= "loginprocess" method="POST" class="appointment-form" id="appointment-form">
-            <h4 style="color:black;">${message}</h4>
-                <h2 style="font-family: 'Roboto', sans-serif;">Green Town Society Welcomes You!</h2>
+            <form action= "FlatUserProfile" method="POST" class="appointment-form" id="appointment-form">
+            
+                <h2 style="font-family: 'Roboto', sans-serif;">Manage Profile Information!</h2>
                 <div class="form-group-1">
-                    <input type="text" style="font-size:18px;" name="flatno" id="flatno" placeholder="Flat No" required />
-                    <input type="password" style="font-size:18px;" name="password" id="password" placeholder="Password" required />
+                    <input type="text" style="font-size:18px;" name="name" id="name" placeholder="Full Name" required />
+                    <input type="email" style="font-size:18px;" name="email" id="email" placeholder="Email" required />
+                   <input type="text" style="font-size:18px;" name="phone_number" id="phone_number" maxlength="10" size="10"placeholder="Mobile Number" required />
                 </div>
                 
                 <div class="form-submit">
-                    <input type="submit"  name="submit" id="submit" class="submit" value="Get In!" />
-                    <a href="IndexController" style="font-size: 18px; margin-left: 5px;color: #3b5998">Newbie?</a>
-                   	<h4 style="color:black;">Contact Us:XXXXXXXXXX</h4>
+                    <input type="submit"  name="submit" id="submit" class="submit" value="Update!" />
+                    
                 </div>
             </form>
             

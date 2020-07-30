@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.sfm.model.FlatUser;
 import com.sfm.util.DBConnection;
@@ -59,6 +61,44 @@ public class FlatUserDAOImpl implements FlatUserDAO{
 			e.printStackTrace();
 		}
 		return flatuser;
+	}
+
+
+
+
+	public List<Integer> getAllFlatusers() {
+		List<Integer> flatlist=new ArrayList<Integer>();
+		String sql="SELECT flatno FROM flatuser";
+		try {
+			connection = DBConnection.openConnection();
+			statement=connection.createStatement();
+			resultSet = statement.executeQuery(sql);
+			
+			while(resultSet.next()) {
+				flatlist.add(resultSet.getInt(1));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return flatlist;
+	}
+
+
+
+
+	public boolean updateprofile(int flatno,String name, String email, String mobile) {
+		boolean flag=false;
+		String sql="update flatuser set name='"+name+"',email='"+email+"',mobile='"+mobile+"' where flatno='"+flatno+"'"; 
+		try {
+			
+			connection = DBConnection.openConnection();
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.executeUpdate();
+			flag = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return flag;
 	}
 
 }

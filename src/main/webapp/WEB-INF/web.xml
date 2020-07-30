@@ -33,6 +33,12 @@
   	<description></description>
   	<servlet-class>com.sfm.controller.DefaultersController</servlet-class>
   	</servlet>
+	<servlet>
+		<servlet-name>FlatUserProfile</servlet-name>
+		<display-name>FlatUserProfile</display-name>
+		<description></description>
+		<servlet-class>com.sfm.controller.FlatUserProfile</servlet-class>
+	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>IndexController</servlet-name>
@@ -54,6 +60,10 @@
   	<servlet-name>DefaultersController</servlet-name>
   	<url-pattern>/DefaultersController</url-pattern>
   </servlet-mapping>
+<servlet-mapping>
+	<servlet-name>FlatUserProfile</servlet-name>
+	<url-pattern>/FlatUserProfile</url-pattern>
+</servlet-mapping>
 <welcome-file-list>  
    <welcome-file>start.jsp</welcome-file>  
 </welcome-file-list> 

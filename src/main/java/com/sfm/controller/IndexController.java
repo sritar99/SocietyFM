@@ -1,6 +1,7 @@
 package com.sfm.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -40,23 +41,31 @@ public class IndexController extends HttpServlet {
 		fu.setEmail(request.getParameter("email"));
 		fu.setPhone_no(request.getParameter("phone_number"));
 		fu.setPassword(request.getParameter("password"));	
-		
-		if(flatuserdao.save(fu)) {
-			HttpSession session=request.getSession();
-			session.setAttribute("flatsession",request.getParameter("flatno"));
-			System.out.println("UserAdded Successfully");
-			request.setAttribute("userid",Integer.parseInt(request.getParameter("flatno")));
-			String userid=request.getParameter("flatno");
-			String url="HomeController?flatno="+userid;
-			RequestDispatcher dispatcher=request.getRequestDispatcher(url);
+		List<Integer> flatlist=flatuserdao.getAllFlatusers();
+		if(flatlist.contains(Integer.parseInt(request.getParameter("flatno")))) {
+			request.setAttribute("message","User Already Exists!");
+			RequestDispatcher dispatcher=request.getRequestDispatcher("/login.jsp");
 			dispatcher.forward(request, response);
-			if(loggingdao.save("Registration Process","FlatUser",request.getParameter("flatno"))) {
-				System.out.println("logging event inserted");
-			}
 		}else {
-			System.out.println("UserRegistration is  UnSuccessfull");
-			doGet(request, response);
+			if(flatuserdao.save(fu)) {
+				HttpSession session=request.getSession();
+				session.setAttribute("flatsession",request.getParameter("flatno"));
+				System.out.println("UserAdded Successfully");
+				request.setAttribute("userid",Integer.parseInt(request.getParameter("flatno")));
+				String userid=request.getParameter("flatno");
+				String url="HomeController?flatno="+userid;
+				RequestDispatcher dispatcher=request.getRequestDispatcher(url);
+				dispatcher.forward(request, response);
+				if(loggingdao.save("Registration Process","FlatUser",request.getParameter("flatno"))) {
+					System.out.println("logging event inserted");
+				}
+			}else {
+				System.out.println("UserRegistration is  UnSuccessfull");
+				doGet(request, response);
+			}
 		}
+		
+		
 		
 	}
 
